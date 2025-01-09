@@ -71,96 +71,127 @@ path: api/inventory-items/
 Request body: { "name":"Pineapple" , "quantity":"10", "price":"1000", "description":"Very fresh Pineapple", "category": "Fruits"}
 Response body: 201 Created
 
-## 2. Get All Inventory Items 
+## 2. Get All Inventory Items
+
 Method: GET
 path: api/inventory-items/
-Response: 
-        {
-    "count": 12,
-    "next": "http://127.0.0.1:8000/api/inventory-items/?page=2",
-    "previous": null,
-    "results": [
-        {
-            "id": 1,
-            "name": "tawab",
-            "description": null,
-            "quantity": 10,
-            "price": "3000.00",
-            "category": {
-                "id": 1,
-                "name": "Electronics",
-                "description": null,
-                "date_added": "2024-12-30T13:20:00.612076Z"
-            },
-            "date_added": "2024-12-30T13:20:11.198583Z",
-            "last_updated": "2024-12-30T13:20:11.198616Z"
-        },
-        {
-            "id": 2,
-            "name": "tawabprecious",
-            "description": null,
-            "quantity": 80,
-            "price": "60000.00",
-            "category": {
-                "id": 1,
-                "name": "Electronics",
-                "description": null,
-                "date_added": "2024-12-30T13:20:00.612076Z"
-            },
-            "date_added": "2024-12-30T13:33:10.300764Z",
-            "last_updated": "2024-12-30T14:03:48.634244Z"
-        },
-        {
-            "id": 3,
-            "name": "precious",
-            "description": null,
-            "quantity": 10,
-            "price": "4000.00",
-            "category": {
-                "id": 1,
-                "name": "Electronics",
-                "description": null,
-                "date_added": "2024-12-30T13:20:00.612076Z"
-            },
-            "date_added": "2024-12-30T13:54:24.985393Z",
-            "last_updated": "2024-12-30T13:54:24.985423Z"
-        },
-        {
-            "id": 4,
-            "name": "rosine",
-            "description": null,
-            "quantity": 103,
-            "price": "4000000.00",
-            "category": {
-                "id": 1,
-                "name": "Electronics",
-                "description": null,
-                "date_added": "2024-12-30T13:20:00.612076Z"
-            },
-            "date_added": "2024-12-30T14:14:42.272126Z",
-            "last_updated": "2024-12-30T14:14:42.272165Z"
-        },
-        {
-            "id": 5,
-            "name": "rice",
-            "description": null,
-            "quantity": 200,
-            "price": "900.00",
-            "category": {
-                "id": 1,
-                "name": "Electronics",
-                "description": null,
-                "date_added": "2024-12-30T13:20:00.612076Z"
-            },
-            "date_added": "2024-12-30T14:15:10.151217Z",
-            "last_updated": "2024-12-30T14:15:10.151254Z"
-        }
-    ]
+Response:
+{
+"count": 12,
+"next": "http://127.0.0.1:8000/api/inventory-items/?page=2",
+"previous": null,
+"results": [
+{
+"id": 1,
+"name": "tawab",
+"description": null,
+"quantity": 10,
+"price": "3000.00",
+"category": {
+"id": 1,
+"name": "Electronics",
+"description": null,
+"date_added": "2024-12-30T13:20:00.612076Z"
+},
+"date_added": "2024-12-30T13:20:11.198583Z",
+"last_updated": "2024-12-30T13:20:11.198616Z"
+},
+{
+"id": 2,
+"name": "tawabprecious",
+"description": null,
+"quantity": 80,
+"price": "60000.00",
+"category": {
+"id": 1,
+"name": "Electronics",
+"description": null,
+"date_added": "2024-12-30T13:20:00.612076Z"
+},
+"date_added": "2024-12-30T13:33:10.300764Z",
+"last_updated": "2024-12-30T14:03:48.634244Z"
+},
+{
+"id": 3,
+"name": "precious",
+"description": null,
+"quantity": 10,
+"price": "4000.00",
+"category": {
+"id": 1,
+"name": "Electronics",
+"description": null,
+"date_added": "2024-12-30T13:20:00.612076Z"
+},
+"date_added": "2024-12-30T13:54:24.985393Z",
+"last_updated": "2024-12-30T13:54:24.985423Z"
+},
+{
+"id": 4,
+"name": "rosine",
+"description": null,
+"quantity": 103,
+"price": "4000000.00",
+"category": {
+"id": 1,
+"name": "Electronics",
+"description": null,
+"date_added": "2024-12-30T13:20:00.612076Z"
+},
+"date_added": "2024-12-30T14:14:42.272126Z",
+"last_updated": "2024-12-30T14:14:42.272165Z"
+},
+{
+"id": 5,
+"name": "rice",
+"description": null,
+"quantity": 200,
+"price": "900.00",
+"category": {
+"id": 1,
+"name": "Electronics",
+"description": null,
+"date_added": "2024-12-30T13:20:00.612076Z"
+},
+"date_added": "2024-12-30T14:15:10.151217Z",
+"last_updated": "2024-12-30T14:15:10.151254Z"
+}
+]
 }
 
+## 3. Update Inventory item
 
-## 3. Update Inventory item 
 Method: PUT
-Path:
+Path:api/inventory-items/<int:pk>/
 Request:
-Response: 
+{
+"name": "ricebeans"
+"price": "500"
+"description" : "combined rice and beans"
+}
+Response: 200 OK
+
+User Authentication:
+
+## 1. User Registration
+
+Method: GET
+Path: api/register/
+Request Body: {
+"username": "rosine"
+"email": "rosine@gmail.com"
+"password": "1234"
+}
+Response: 201 Creataed
+
+## 2. Login
+
+Method: POST
+Path: api/login/
+Request Body:
+{
+"username": "rosine"
+"email": "rosine@gmail.com"
+"password": "1234"
+}
+Response: 201 OK

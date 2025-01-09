@@ -11,7 +11,10 @@ from django.contrib.auth.models import User
 
 
 class UserRegisterView(generics.CreateAPIView):
-    # Endpoint for user registration.
+    # Provides an endpoint for user registration.
+    # Uses the UserSerializer for validation and creation of new users.
+    # Authentication is not required to access this endpoint.
+
     serializer_class = UserSerializer
     permission_classes = [
         permissions.AllowAny
@@ -19,18 +22,24 @@ class UserRegisterView(generics.CreateAPIView):
 
 
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
+    # Provides endpoints for retrieving, updating, or deleting user details.
+    # Only authenticated users can access this endpoint.
+    # queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]  # Only authenticated users
 
 
 class CategoryListCreateView(generics.ListCreateAPIView):
+    #  Provides endpoints to list all categories or create a new category.
+    # Only authenticated users can access this endpoint.
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
 class InventoryItemListCreateView(generics.ListCreateAPIView):
+    # Provides endpoints to list all inventory items or create a new inventory item.
+    # Items can be filtered and ordered by specified fields.
     queryset = InventoryItem.objects.all()
     serializer_class = InventoryItemSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -43,6 +52,8 @@ class InventoryItemListCreateView(generics.ListCreateAPIView):
 
 
 class InventoryItemDetailView(generics.RetrieveUpdateDestroyAPIView):
+    # Provides endpoints for retrieving, updating, or deleting an inventory item.
+    # Users can only access their own inventory items.
     queryset = InventoryItem.objects.all()
     serializer_class = InventoryItemSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwner]
@@ -53,6 +64,8 @@ class InventoryItemDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class InventoryChangeLogListView(generics.ListAPIView):
+    #   Provides an endpoint to list change logs for inventory items.
+    # Users can only view logs for items they own.
     queryset = InventoryChangeLog.objects.all()
     serializer_class = InventoryChangeLogSerializer
     permission_classes = [permissions.IsAuthenticated]
